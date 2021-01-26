@@ -1,15 +1,21 @@
-
-from time import sleep
+import requests
 import sys
+link = "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
+file_name = "download.data"
+with open(file_name, "wb") as f:
+    print ("Downloading %s" % file_name)
+    response = requests.get(link, stream=True)
+    total_length = response.headers.get('content-length')
 
-import time
-
-
-
-for i in range(50):
-    time.sleep(0.1)
-    print(("[%d"%i+"%]")+("["+('#'*i)),end= ((50-i)*' ')+"] \r")
-    if(i==49):
-     time.sleep(0.1)
-     print(("[OK!]"),end=(51)*' '+" \r")
-    
+    if total_length is None: # no content length header
+        f.write(response.content)
+    else:
+        dl = 0
+        total_length = int(total_length)
+        for data in response.iter_content(chunk_size=4096):
+            dl += len(data)
+            f.write(data)
+            done = int(50 * dl / total_length)
+            print("[%s%s]" % ('=' * done, ' ' * (50-done)), end="\r" )    
+           
+        print("[OK]",end=49*" "+"\r")    
