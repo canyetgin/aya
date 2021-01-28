@@ -1,6 +1,6 @@
 import requests
 import sys
-link = "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
+link = "https://download-cf.jetbrains.com/python/pycharm-community-2020.3.3.exe"
 file_name = "download.data"
 with open(file_name, "wb") as f:
     print ("Downloading %s" % file_name)
