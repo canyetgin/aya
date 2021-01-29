@@ -1,5 +1,5 @@
-import requests
 
+import requests
 link = "https://images-na.ssl-images-amazon.com/images/I/71CY05k-CxL._AC_SL1500_.jpg"
 file_name = "download.data"
 
